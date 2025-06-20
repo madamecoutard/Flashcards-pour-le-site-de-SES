@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Flashcards - Économie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      max-width: 600px;
+      width: 90%;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card p {
+      font-size: 1.2rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .counter {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cartes de Révision - Concepts Économiques</h1>
+  <div class="card" id="flashcard">
+    <p id="card-text">Chargement...</p>
+  </div>
+
+  <div class="controls">
+    <button onclick="prevCard()">⬅️ Précédente</button>
+    <button onclick="flipCard()">🔄 Retourner</button>
+    <button onclick="nextCard()">Suivante ➡️</button>
+  </div>
+
+  <div class="counter" id="counter"></div>
+
+  <script>
+    const cards = [
+      {
+        recto: "Gains de Productivité",
+        verso: "Les gains de productivité correspondent à l'augmentation de la productivité du travail. Ils se traduisent par une baisse des coûts de production unitaires."
+      },
+      {
+        recto: "Consommations intermédiaires",
+        verso: "Les consommations intermédiaires correspondent aux biens et services transformés ou détruits au cours du processus de production et dont la durée de vie est inférieure à un an."
+      },
+      {
+        recto: "Productivité Globale des Facteurs de Production",
+        verso: "La productivité globale des facteurs est une mesure du progrès technique. Elle se calcule en rapportant la production aux quantités de travail et de capital utilisées."
+      },
+      {
+        recto: "PIB en Volume",
+        verso: "Mesure du produit intérieur brut qui exclut l'effet des variations de prix, permettant d'évaluer la croissance économique réelle."
+      },
+      {
+        recto: "Loi des Rendements Décroissants",
+        verso: "Principe selon lequel l’augmentation des quantités de facteurs entraîne une croissance de la production qui ralentit progressivement en raison des productivités marginales décroissantes."
+      },
+      {
+        recto: "Production Marchande",
+        verso: "Partie de la production destinée à être vendue, mesurée par le chiffre d'affaires (prix de vente unitaire × quantités vendues)."
+      },
+      {
+        recto: "Progrès Technique",
+        verso: "Le progrès technique correspond à l’ensemble des éléments qui concourent à l’augmentation de la productivité globale des facteurs de production."
+      },
+      {
+        recto: "Croissance Économique",
+        verso: "La croissance économique correspond à l’augmentation de la production sur une longue période. On utilise en général le taux de variation du PIB en volume pour la mesurer."
+      },
+      {
+        recto: "Facteurs de Production",
+        verso: "Éléments durables qui concourent à la production : travail et capital, associés dans une combinaison productive."
+      },
+      {
+        recto: "Combinaison productive",
+        verso: "Choix des quantités de travail et de capital utilisés pour réaliser la production par les entreprises."
+      },
+      {
+        recto: "Investissement",
+        verso: "Dépenses pour acquérir/améliorer les facteurs de production : matériel (machines) ou immatériel (formation, R&D)."
+      },
+      {
+        recto: "Production Non Marchande",
+        verso: "Production gratuite ou vendue à un prix inférieur à 50% du coût de production, mesurée par les coûts des facteurs de production utilisés."
+      }
+    ];
+
+    let currentCard = 0;
+    let isFlipped = false;
+
+    function updateCard() {
+      const text = isFlipped ? cards[currentCard].verso : cards[currentCard].recto;
+      document.getElementById("card-text").textContent = text;
+      document.getElementById("counter").textContent = `Carte ${currentCard + 1} sur ${cards.length} (${isFlipped ? 'Verso' : 'Recto'})`;
+    }
+
+    function flipCard() {
+      isFlipped = !isFlipped;
+      updateCard();
+    }
+
+    function nextCard() {
+      if (currentCard < cards.length - 1) {
+        currentCard++;
+        isFlipped = false;
+        updateCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentCard > 0) {
+        currentCard--;
+        isFlipped = false;
+        updateCard();
+      }
+    }
+
+    updateCard();
+  </script>
+</body>
+</html>
